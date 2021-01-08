@@ -1,1 +1,1 @@
-Base things in computer sience implemented on PHP.
+Base things in computer sience implemented on PHP

@@ -1,0 +1,27 @@
+{
+    "name": "ardiakov/php-base-computer-sience",
+    "description": "",
+    "type": "library",
+    "authors": [
+        {
+            "name": "ardiakov",
+            "email": "adiakov.work@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Ardiakov\\PhpBase\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ardiakov\\PhpBase\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
