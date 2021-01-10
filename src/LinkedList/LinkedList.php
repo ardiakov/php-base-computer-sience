@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ardiakov\PhpBase\LinkedList;
 
+use phpDocumentor\Reflection\Types\Mixed_;
+
 /**
  * Class LinkedList
  *
@@ -61,6 +63,40 @@ final class LinkedList
         }
 
         return $allData;
+    }
+
+    /**
+     * Удаление одного элемента по значению
+     *
+     * @param $value
+     *
+     * @return void
+     */
+    public function deleteByValue($value): void
+    {
+        $current = $this->head;
+
+        if (null === $current) {
+            return;
+        }
+
+        $previous = null;
+
+        while ($current !== null) {
+            $next = $current->next;
+            if ($current->data() === $value) {
+                if ($previous === null) {
+                    $this->head = $next;
+                } else {
+                    $previous->next = $next;
+                }
+
+                $this->counter--;
+            }
+
+            $previous = $current;
+            $current = $current->next;
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class TestLinkedList extends TestCase
 {
-    public function testCreate(): void
+    public function testAddNode(): void
     {
         $linkedList = new LinkedList();
 
@@ -24,5 +24,19 @@ final class TestLinkedList extends TestCase
 
         $this->assertEquals([20, 16, 10], $linkedList->displayData());
         $this->assertEquals(3, $linkedList->counter());
+    }
+
+    public function testDeleteByValue(): void
+    {
+        $linkedList = new LinkedList();
+
+        $linkedList->addNode(15);
+        $linkedList->addNode(27);
+        $linkedList->addNode(34);
+
+        $linkedList->deleteByValue(27);
+
+        $this->assertEquals([34, 15], $linkedList->displayData());
+        $this->assertEquals(2, $linkedList->counter());
     }
 }
