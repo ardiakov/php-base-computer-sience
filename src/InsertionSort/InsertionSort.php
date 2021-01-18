@@ -33,12 +33,10 @@ final class InsertionSort
 
         for($i = 1; $i < count($this->integers); $i++) {
             $current = $this->integers[$i];
-
             $j = $i - 1;
-            while ($j !== 0 && $current > $this->integers[$j]) {
-                $temp = $this->integers[$j];
+            while ($j >= 0 && $current < $prev = $this->integers[$j]) {
                 $this->integers[$j] = $current;
-                $this->integers[$i] = $temp;
+                $this->integers[$j + 1] = $prev;
 
                 $j--;
             }
