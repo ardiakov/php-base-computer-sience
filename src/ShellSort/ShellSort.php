@@ -37,16 +37,27 @@ final class ShellSort
             return $this->integers;
         }
 
-        $recursive = function ($numbs) {
-            $middle = round($numbs / 2, 0, PHP_ROUND_HALF_DOWN);
+        $numbers = $this->integers;
 
+        $recursive = function ($count) use (&$recursive, $numbers) {
+            $step = (int) $count / 2;
 
+            for ($i = $step; $i < $count; $i++) {
+                $leftIndex = $i - $step;
+                $rightIndex = $i;
+
+                while ($leftIndex >= 0 && $numbers[$rightIndex] > $numbers[$leftIndex]) {
+                    $temp = $numbers[$leftIndex];
+                    $numbers[$leftIndex] = $numbers[$rightIndex];
+                    $numbers[$rightIndex] = $temp;
+
+                    $i = $i - $step;
+                }
+            }
         };
 
         $recursive($this->count);
 
-
-
-
+        return $this->integers;
     }
 }
