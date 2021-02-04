@@ -39,7 +39,6 @@ final class ShellSort
 
         $recursive = function ($count) use (&$recursive) {
             $step = (int) ($count / 2);
-            var_dump("Шаг {$step}");
 
             for ($i = $step; $i < $this->count; $i++) {
                 $leftIndex = $i - $step;
