@@ -37,22 +37,26 @@ final class ShellSort
             return $this->integers;
         }
 
-        $numbers = $this->integers;
+        $recursive = function ($count) use (&$recursive) {
+            $step = (int) ($count / 2);
+            var_dump("Шаг {$step}");
 
-        $recursive = function ($count) use (&$recursive, $numbers) {
-            $step = (int) $count / 2;
-
-            for ($i = $step; $i < $count; $i++) {
+            for ($i = $step; $i < $this->count; $i++) {
                 $leftIndex = $i - $step;
                 $rightIndex = $i;
 
-                while ($leftIndex >= 0 && $numbers[$rightIndex] > $numbers[$leftIndex]) {
-                    $temp = $numbers[$leftIndex];
-                    $numbers[$leftIndex] = $numbers[$rightIndex];
-                    $numbers[$rightIndex] = $temp;
+                while ($leftIndex >= 0 && $this->integers[$leftIndex] > $this->integers[$rightIndex]) {
+                    $temp = $this->integers[$leftIndex];
+                    $this->integers[$leftIndex] = $this->integers[$rightIndex];
+                    $this->integers[$rightIndex] = $temp;
 
-                    $i = $i - $step;
+                    $leftIndex -= $step;
+                    $rightIndex -= $step;
                 }
+            }
+
+            if ($step >= 1) {
+                $recursive($step);
             }
         };
 
