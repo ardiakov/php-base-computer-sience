@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class TestBinaryTree extends TestCase
 {
-    public function test(): void
+    public function testFind(): void
     {
         $tree = new Tree();
         $tree
@@ -23,6 +23,6 @@ final class TestBinaryTree extends TestCase
             ->add(3)
             ->add(25);
 
-        print_r($tree->root);
+        $this->assertEquals(25, $tree->find(25));
     }
 }

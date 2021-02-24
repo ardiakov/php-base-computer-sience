@@ -53,4 +53,34 @@ final class Tree
 
         return $this;
     }
+
+    /**
+     * Поиск элемента
+     *
+     * @param $value
+     *
+     * @return int|null
+     */
+    public function find($value): ?int
+    {
+        if (null === $this->root) {
+            return null;
+        }
+
+        $current = $this->root;
+
+        while ($current !== null) {
+            if ($value === $current->data) {
+                return $current->data;
+            }
+
+            if ($value < $current->data) {
+                $current = $current->left;
+            } else {
+                $current = $current->right;
+            }
+        }
+
+        return null;
+    }
 }
