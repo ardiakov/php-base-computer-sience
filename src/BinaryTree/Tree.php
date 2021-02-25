@@ -83,4 +83,33 @@ final class Tree
 
         return null;
     }
+
+    /**
+     * Симетричный обход
+     *
+     * @return array
+     */
+    public function inOrder(): array
+    {
+        if (null === $this->root) {
+            return [];
+        }
+
+        $result = [];
+        $travers = function (Node $node) use (&$result, &$travers) {
+            if (null !== $node->left) {
+                $travers($node->left);
+            }
+
+            $result[] = $node->data;
+
+            if (null !== $node->right) {
+                $travers($node->right);
+            }
+        };
+
+        $travers($this->root);
+
+        return $result;
+    }
 }

@@ -21,8 +21,22 @@ final class TestBinaryTree extends TestCase
             ->add(5)
             ->add(15)
             ->add(3)
-            ->add(25);
+            ->add(25)
+        ;
 
         $this->assertEquals(25, $tree->find(25));
+    }
+
+    public function testInOrderTraverse(): void
+    {
+        $tree = new Tree();
+        $tree
+            ->add(5)
+            ->add(15)
+            ->add(3)
+            ->add(25)
+        ;
+
+        $this->assertEquals([3, 5, 15, 25], $tree->inOrder());
     }
 }
