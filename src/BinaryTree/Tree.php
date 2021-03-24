@@ -85,7 +85,7 @@ final class Tree
     }
 
     /**
-     * Симетричный обход
+     * Симетричный обход (по возрастанию в двоичном дереве)
      *
      * @return array
      */
@@ -109,6 +109,65 @@ final class Tree
         };
 
         $travers($this->root);
+
+        return $result;
+    }
+
+    /**
+     * Прямой обход (лево-право)
+     *
+     * @return array
+     */
+    public function preOrder(): array
+    {
+        if (null === $this->root) {
+            return [];
+        }
+
+        $result = [];
+        $travers = function (Node $node) use (&$result, &$travers) {
+            $result[] = $node->data;
+
+            if (null !== $node->left) {
+                $travers($node->left);
+            }
+
+            if (null !== $node->right) {
+                $travers($node->right);
+            }
+        };
+
+        $travers($this->root);
+
+        return $result;
+    }
+
+    /**
+     * Обход дерева в ширину
+     */
+    public function breadthFirst(): array
+    {
+        if (null === $this->root) {
+            return [];
+        }
+
+        $queue = [];
+        $result = [];
+
+        array_push($queue, $this->root);
+
+        while ($queue !== []) {
+            $node = array_shift($queue);
+            $result[] = $node->data;
+
+            if (null !== $node->left) {
+                array_push($queue, $node->left);
+            }
+
+            if (null !== $node->right) {
+                array_push($queue, $node->right);
+            }
+        }
 
         return $result;
     }
