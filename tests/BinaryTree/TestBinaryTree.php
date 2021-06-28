@@ -72,8 +72,6 @@ final class TestBinaryTree extends TestCase
             ->add(25)
         ;
 
-        var_dump($tree);
-
         $this->assertEquals([5, 3, 15, 12, 25, 10], $tree->breadthFirst());
     }
 }
