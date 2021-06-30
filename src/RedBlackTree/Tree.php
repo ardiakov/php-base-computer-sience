@@ -112,22 +112,42 @@ final class Tree
 
     public function validateBlackHeight(): void
     {
-       $travers = function (?Node $node) use (&$travers) {
-           if (null === $node) {
-               return;
-           }
+        $countBlacks = [];
 
-           echo PHP_EOL. $node->data ." " .$node->color();
+        $counter = 0;
+        $max = 0;
 
-           if ($node->left !== null) {
-               $travers($node->left);
-           }
+        $travers = function (?Node $node) use (&$travers, &$countBlacks, &$counter, &$max) {
+            if (null === $node) {
+                return;
+            }
 
-           if ($node->right !== null) {
-               $travers($node->right);
-           }
-       };
+            $counter++;
+
+            echo PHP_EOL . $node->data . " " . $node->color()." ".$counter;
+            if ($node->isBlack() && $max < $counter) {
+                $max = $counter;
+            }
+
+            if ($node->left !== null) {
+                $travers($node->left);
+            }
+
+            if ($node->right !== null) {
+                $travers($node->right);
+            }
+
+            if ($max > 0) {
+                $countBlacks[] = $max;
+                $max = 0;
+            }
+
+            $counter--;
+        };
 
        $travers($this->root);
+
+       echo PHP_EOL;
+       var_dump($countBlacks);
     }
 }

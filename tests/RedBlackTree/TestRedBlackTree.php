@@ -54,6 +54,9 @@ final class TestRedBlackTree extends TestCase
 
         // Добавляем новый красный элемент
         $tree->add(12);
+        $tree->add(26);
+        $tree->find(26)->refill();
+        $tree->add(27);
 
         $tree->validateBlackHeight();
     }

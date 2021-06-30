@@ -69,8 +69,15 @@ final class Node
 
     public function refill(): void
     {
-        $this->left->markBlack();
-        $this->right->markBlack();
+        $this->markBlack();
+
+        if (null !== $this->left) {
+            $this->left->markBlack();
+        }
+
+        if (null !== $this->right) {
+            $this->right->markBlack();
+        }
     }
 
     /**
