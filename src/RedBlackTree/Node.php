@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ardiakov\PhpBase\RedBlackTree;
 
 use Ardiakov\PhpBase\RedBlackTree\Exceptions\R3ChildForRedParentMustBeBlack;
+use RuntimeException;
 
 /**
  * Class Node
@@ -66,12 +67,18 @@ final class Node
         return $this->isRed;
     }
 
+    public function refill(): void
+    {
+        $this->left->markBlack();
+        $this->right->markBlack();
+    }
+
     /**
      * @throws R3ChildForRedParentMustBeBlack
      *
      * @return void
      */
-    public function validateChildColors(): void
+    public function validateChildColorsBeforeInsert(): void
     {
         if (false === $this->isRed()) {
             return;
@@ -88,5 +95,18 @@ final class Node
         if (false === $this->right->isBlack()) {
             throw new R3ChildForRedParentMustBeBlack();
         }
+    }
+
+    public function color(): string
+    {
+        if (true === $this->isBlack()) {
+            return 'black';
+        }
+
+        if (true === $this->isRed()) {
+            return 'red';
+        }
+
+        throw new RuntimeException();
     }
 }
