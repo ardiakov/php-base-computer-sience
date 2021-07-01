@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ardiakov\PhpBase\Tests\RedBlackTree;
 
+use Ardiakov\PhpBase\RedBlackTree\Exceptions\BlackHeightInvalid;
 use Ardiakov\PhpBase\RedBlackTree\Exceptions\R2RootMustBeBlack;
 use Ardiakov\PhpBase\RedBlackTree\Tree;
 use PHPUnit\Framework\TestCase;
@@ -20,8 +21,7 @@ final class TestRedBlackTree extends TestCase
     {
         $tree = new Tree();
         $tree
-            ->add(50);
-        ;
+            ->add(50);;
 
         // Проверяем что корень дерева черный
         $this->assertTrue($tree->isRootBlack());
@@ -58,6 +58,15 @@ final class TestRedBlackTree extends TestCase
         $tree->find(26)->refill();
         $tree->add(27);
 
-        $tree->validateBlackHeight();
+        $exception = null;
+        try {
+            $tree->validateBlackHeight();
+        } catch (Throwable $e) {
+            $exception = $e;
+        }
+
+        $this->assertInstanceOf(BlackHeightInvalid::class, $exception);
+
+
     }
 }

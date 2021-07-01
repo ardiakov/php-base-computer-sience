@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ardiakov\PhpBase\RedBlackTree;
 
+use Ardiakov\PhpBase\RedBlackTree\Exceptions\BlackHeightInvalid;
 use Ardiakov\PhpBase\RedBlackTree\Exceptions\R2RootMustBeBlack;
+use Ardiakov\PhpBase\RedBlackTree\Exceptions\RightRotateNotImpossible;
 
 /**
  * Class Tree
@@ -147,7 +149,25 @@ final class Tree
 
        $travers($this->root);
 
-       echo PHP_EOL;
-       var_dump($countBlacks);
+       if (count($countBlacks) <= 1) {
+           return;
+       }
+
+       $previous = $countBlacks[0];
+
+       foreach ($countBlacks as $item) {
+           if ($item !== $previous) {
+               throw new BlackHeightInvalid();
+           }
+       }
+    }
+
+    public function rightRotate(Node $node): void
+    {
+        if (null === $node->left) {
+            throw new RightRotateNotImpossible();
+        }
+
+
     }
 }
